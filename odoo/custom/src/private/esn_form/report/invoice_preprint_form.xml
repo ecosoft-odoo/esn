@@ -1,0 +1,143 @@
+<odoo>
+    <template id="invoice_preprint_form">
+        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+        <div class="header" style="font-size: 14px;">
+            <t t-set="inv_date_year" t-value="o.invoice_date.strftime('%Y')" />
+            <t t-set="inv_date_due_year" t-value="o.invoice_date_due.strftime('%Y')" />
+            <t
+                t-set="invoice_date"
+                t-value="'/'.join([o.invoice_date.strftime('%d/%m'), str(int(inv_date_year) + 543)])"
+            />
+            <t
+                t-set="invoice_date_due"
+                t-value="'/'.join([o.invoice_date_due.strftime('%d/%m'), str(int(inv_date_due_year) + 543)])"
+            />
+            <div class="row">
+                <div
+                    class="col-9"
+                    name="col_left"
+                    style="padding-top: 280px; padding-left: 120px;"
+                >
+                    <span t-field="o.partner_id.name" /><br />
+                    <span
+                        t-esc="' '.join(filter(lambda l: l != False, [o.partner_id.street, o.partner_id.street2]))"
+                    /><br />
+                    <span
+                        t-esc="' '.join(filter(lambda l: l != False, [o.partner_id.city, o.partner_id.zip]))"
+                    />
+                    <t t-if="o.partner_id.vat">
+                        เลขประจำตัวผู้เสียภาษี <span t-field="o.partner_id.vat" />
+                    </t>
+                    <br />โทร. <span t-field="o.partner_id.phone" />
+                </div>
+                <div
+                    class="col-3"
+                    name="col_right"
+                    style="padding-top: 215px; padding-left:80px;"
+                >
+                    <div t-field="o.name" />
+                    <div style="margin-top:10px;" t-esc="invoice_date" />
+                    <div style="margin-top:10px;" t-esc="invoice_date_due" />
+                    <div
+                        style="margin-top:70px;"
+                        t-field="o.invoice_user_id.display_name"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="article" style="font-size: 14px;">
+            <table class="table table-sm o_main_table">
+                <tbody>
+                    <t t-set="index" t-value="1" />
+                    <t t-set="discount" t-value="0" />
+                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                        <tr>
+                            <td
+                                class="text-center"
+                                style="width: 80px; border-top: none !important; min-height: 50px;"
+                            >
+                                <span t-esc="index" />
+                                <t t-set="index" t-value="index + 1" />
+                            </td>
+                            <td style="width: 130px; border-top: none !important;">
+                                <span t-field="line.product_id.default_code" />
+                            </td>
+                            <td style="width: 370px; border-top: none !important;">
+                                <span t-field="line.name" />
+                            </td>
+                            <td
+                                class="text-center"
+                                style="width: 50px; border-top: none !important;"
+                            >
+                                <span t-esc="'{0:,.2f}'.format(line.quantity)" />
+                            </td>
+                            <td
+                                class="text-right"
+                                style="width: 90px; border-top: none !important;"
+                            >
+                                <span t-esc="'{0:,.2f}'.format(line.price_unit)" />
+                            </td>
+                            <td
+                                class="text-right"
+                                style="width: 90px; border-top: none !important;"
+                            >
+                                <span t-esc="'{0:,.2f}'.format(line.price_subtotal)" />
+                            </td>
+                            <!-- <td style="border-top: none !important;"/> -->
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer" style="font-size: 14px;">
+            <t
+                t-set="amount_to_text"
+                t-value="o.currency_id.with_context({'lang': 'th_TH'}).amount_to_text(o.amount_total)"
+            />
+            <t t-set="amount_split" t-value="amount_to_text.split(' ')" />
+            <t t-if="len(amount_split) &gt; 2">
+                <t
+                    t-set="amount_text_thai"
+                    t-value="''.join([amount_split[0], 'บาท', amount_split[3], 'สตางค์'])"
+                />
+            </t>
+            <t t-else="">
+                <t
+                    t-set="amount_text_thai"
+                    t-value="''.join([amount_split[0], 'บาทถ้วน'])"
+                />
+            </t>
+            <div class="row pt8">
+                <div class="col-8" />
+                <div class="col-4">
+                    <div class="text-right" style="margin-right:1px;">
+                        <p class="mb8" t-esc="'{0:,.2f}'.format(o.amount_untaxed)" />
+                        <p class="mb8" t-esc="'{0:,.2f}'.format(discount)" />
+                        <p
+                            class="mb8"
+                            t-esc="'{0:,.2f}'.format(o.amount_untaxed + discount)"
+                        />
+                        <p class="mb8" t-esc="'{0:,.2f}'.format(o.amount_tax)" />
+                    </div>
+                </div>
+            </div>
+            <div class="row pt8">
+                <div class="col-8 text-center">
+                    <p><b t-esc="'(' + amount_text_thai + ')'" /></p>
+                </div>
+                <div class="col-4 text-right">
+                    <div style="margin-right:1px;">
+                        <p><b t-esc="'{0:,.2f}'.format(o.amount_total)" /></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="invoice_preprint_form_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="esn_form.invoice_preprint_form" />
+            </t>
+        </t>
+    </template>
+</odoo>
