@@ -60,7 +60,7 @@
                                 <t t-set="index" t-value="index + 1" />
                             </td>
                             <td style="width: 130px; border-top: none !important;">
-                                <span t-field="line.product_id.default_code" />
+                                <span t-field="line.product_id.name" />
                             </td>
                             <td style="width: 370px; border-top: none !important;">
                                 <span t-field="line.name" />
