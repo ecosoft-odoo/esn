@@ -16,7 +16,7 @@
                 <div
                     class="col-9"
                     name="col_left"
-                    style="padding-top: 280px; padding-left: 64px;"
+                    style="padding-top: 280px; padding-left: 79px;"
                 >
                     <div style="padding-left: 56px;margin-bottom:3px;">
                         <span t-field="o.partner_id.name" />
