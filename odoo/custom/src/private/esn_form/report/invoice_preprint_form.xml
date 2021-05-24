@@ -16,9 +16,11 @@
                 <div
                     class="col-9"
                     name="col_left"
-                    style="padding-top: 280px; padding-left: 120px;"
+                    style="padding-top: 280px; padding-left: 64px;"
                 >
-                    <span t-field="o.partner_id.name" /><br />
+                    <div style="padding-left: 56px;margin-bottom:3px;">
+                        <span t-field="o.partner_id.name" />
+                    </div>
                     <span
                         t-esc="' '.join(filter(lambda l: l != False, [o.partner_id.street, o.partner_id.street2]))"
                     /><br />
@@ -33,9 +35,9 @@
                 <div
                     class="col-3"
                     name="col_right"
-                    style="padding-top: 215px; padding-left:80px;"
+                    style="padding-top: 215px; padding-left:26px;"
                 >
-                    <div t-field="o.name" />
+                    <div style="margin-top:5px;" t-field="o.name" />
                     <div style="margin-top:10px;" t-esc="invoice_date" />
                     <div style="margin-top:10px;" t-esc="invoice_date_due" />
                     <div
