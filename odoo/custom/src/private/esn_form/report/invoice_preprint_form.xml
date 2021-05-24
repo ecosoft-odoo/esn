@@ -107,7 +107,9 @@
                                     <span t-field="line.product_id.name" />
                                 </td>
                                 <td style="width: 370px; border-top: none !important;">
-                                    <span t-field="line.name" />
+                                    <span
+                                        t-esc="line.name.replace(line.product_id.name, '')[0:50]"
+                                    />
                                     <t t-if="lots">
                                         <br /><span
                                             t-esc="', '.join(lot.name for lot in lots)"
@@ -165,28 +167,28 @@
                     <div class="text-right" style="margin-right:1px;">
                         <p
                             class="mb8"
-                            style="margin-bottom:13px;"
+                            style="margin-bottom:10px;"
                             t-esc="'{0:,.2f}'.format(o.amount_untaxed)"
                         />
                         <p
                             class="mb8"
-                            style="margin-bottom:13px;"
+                            style="margin-bottom:10px;"
                             t-esc="'{0:,.2f}'.format(discount)"
                         />
                         <p
                             class="mb8"
-                            style="margin-bottom:13px;"
+                            style="margin-bottom:10px;"
                             t-esc="'{0:,.2f}'.format(o.amount_untaxed + discount)"
                         />
                         <p
                             class="mb8"
-                            style="margin-bottom:13px;"
+                            style="margin-bottom:10px;"
                             t-esc="'{0:,.2f}'.format(o.amount_tax)"
                         />
                     </div>
                 </div>
             </div>
-            <p style="margin-bottom:13px;">
+            <p style="margin-bottom:10px;">
                 <div class="row pt8">
                     <div class="col-8 text-center">
                         <p><b t-esc="'(' + amount_text_thai + ')'" /></p>
