@@ -167,22 +167,22 @@
                     <div class="text-right" style="margin-right:1px;">
                         <p
                             class="mb8"
-                            style="margin-bottom:10px;"
+                            style="margin-bottom:6px;"
                             t-esc="'{0:,.2f}'.format(o.amount_untaxed)"
                         />
                         <p
                             class="mb8"
-                            style="margin-bottom:10px;"
+                            style="margin-bottom:6px;"
                             t-esc="'{0:,.2f}'.format(discount)"
                         />
                         <p
                             class="mb8"
-                            style="margin-bottom:10px;"
+                            style="margin-bottom:6px;"
                             t-esc="'{0:,.2f}'.format(o.amount_untaxed + discount)"
                         />
                         <p
                             class="mb8"
-                            style="margin-bottom:10px;"
+                            style="margin-bottom:8px;"
                             t-esc="'{0:,.2f}'.format(o.amount_tax)"
                         />
                     </div>
