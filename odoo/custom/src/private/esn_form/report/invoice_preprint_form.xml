@@ -40,7 +40,16 @@
                     <div style="margin-top:5px;" t-field="o.name" />
                     <div style="margin-top:10px;" t-esc="invoice_date" />
                     <div style="margin-top:10px;" t-esc="invoice_date_due" />
-                    <div style="margin-top:40px;" t-field="o.ref" />
+                    <t t-if="o.invoice_payment_term_id">
+                        <div
+                            style="margin-top:10px;"
+                            t-esc="o.invoice_payment_term_id.name"
+                        />
+                    </t>
+                    <t t-else="">
+                        <div style="margin-top:10px;color:white;" t-esc="'.'" />
+                    </t>
+                    <div style="margin-top:10px;" t-field="o.ref" />
                     <div
                         style="margin-top:10px;"
                         t-field="o.invoice_user_id.display_name"
