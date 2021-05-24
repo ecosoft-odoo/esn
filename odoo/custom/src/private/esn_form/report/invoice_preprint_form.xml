@@ -79,9 +79,21 @@
         <div class="article" style="font-size: 14px;">
             <table class="table table-sm o_main_table">
                 <tbody>
+                    <t
+                        t-set="sale_orders"
+                        t-value="o.mapped('invoice_line_ids.sale_line_ids.order_id')"
+                    />
+                    <t
+                        t-set="stock_move_lines"
+                        t-value="sale_orders.mapped('picking_ids.move_lines.move_line_ids')"
+                    />
                     <t t-set="index" t-value="1" />
                     <t t-set="discount" t-value="0" />
                     <t t-foreach="o.invoice_line_ids" t-as="line">
+                        <t
+                            t-set="lots"
+                            t-value="stock_move_lines.filtered(lambda l: l.state == 'done' and l.lot_id and l.product_id == line.product_id).mapped('lot_id')"
+                        />
                         <tr>
                             <td
                                 class="text-center"
@@ -95,6 +107,11 @@
                             </td>
                             <td style="width: 370px; border-top: none !important;">
                                 <span t-field="line.name" />
+                                <t t-if="lots">
+                                    <br /><span
+                                        t-esc="', '.join(lot.name for lot in lots)"
+                                    />
+                                </t>
                             </td>
                             <td
                                 class="text-center"
