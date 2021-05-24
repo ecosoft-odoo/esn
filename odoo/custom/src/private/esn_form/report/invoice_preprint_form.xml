@@ -71,7 +71,7 @@
                     <div
                         style="margin-top:10px;"
                         class="text-center"
-                        t-field="o.invoice_user_id.display_name.replace('Easy Network', '').replace('Easynetwork', '')"
+                        t-esc="o.invoice_user_id.display_name.replace('Easy Network', '').replace('Easynetwork', '')"
                     />
                 </div>
             </div>
