@@ -37,12 +37,21 @@
                     name="col_right"
                     style="padding-top: 215px; padding-left:70px;"
                 >
-                    <div style="margin-top:5px;" t-field="o.name" />
-                    <div style="margin-top:10px;" t-esc="invoice_date" />
-                    <div style="margin-top:10px;" t-esc="invoice_date_due" />
+                    <div style="margin-top:5px;" class="text-center" t-field="o.name" />
+                    <div
+                        style="margin-top:10px;"
+                        class="text-center"
+                        t-esc="invoice_date"
+                    />
+                    <div
+                        style="margin-top:10px;"
+                        class="text-center"
+                        t-esc="invoice_date_due"
+                    />
                     <t t-if="o.invoice_payment_term_id">
                         <div
                             style="margin-top:10px;"
+                            class="text-center"
                             t-esc="o.invoice_payment_term_id.name"
                         />
                     </t>
@@ -50,13 +59,18 @@
                         <div style="margin-top:10px;color:white;" t-esc="'.'" />
                     </t>
                     <t t-if="o.ref">
-                        <div style="margin-top:10px;" t-esc="o.ref" />
+                        <div
+                            style="margin-top:10px;"
+                            class="text-center"
+                            t-esc="o.ref"
+                        />
                     </t>
                     <t t-else="">
                         <div style="margin-top:10px;color:white;" t-esc="'.'" />
                     </t>
                     <div
                         style="margin-top:10px;"
+                        class="text-center"
                         t-field="o.invoice_user_id.display_name.replace('Easy Network', '').replace('Easynetwork', '')"
                     />
                 </div>
@@ -138,16 +152,18 @@
                     </div>
                 </div>
             </div>
-            <div class="row pt8">
-                <div class="col-8 text-center">
-                    <p><b t-esc="'(' + amount_text_thai + ')'" /></p>
-                </div>
-                <div class="col-4 text-right">
-                    <div style="margin-right:1px;">
-                        <p><b t-esc="'{0:,.2f}'.format(o.amount_total)" /></p>
+            <p>
+                <div class="row pt8">
+                    <div class="col-8 text-center">
+                        <p><b t-esc="'(' + amount_text_thai + ')'" /></p>
+                    </div>
+                    <div class="col-4 text-right">
+                        <div style="margin-right:1px;">
+                            <p><b t-esc="'{0:,.2f}'.format(o.amount_total)" /></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </p>
         </div>
     </template>
     <template id="invoice_preprint_form_pdf">
