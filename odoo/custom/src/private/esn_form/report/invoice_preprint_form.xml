@@ -95,43 +95,47 @@
                             t-value="stock_move_lines.filtered(lambda l: l.state == 'done' and l.lot_id and l.product_id == line.product_id).mapped('lot_id')"
                         />
                         <tr>
-                            <td
-                                class="text-center"
-                                style="width: 60px; border-top: none !important; min-height: 50px;"
-                            >
-                                <span t-esc="index" />
-                                <t t-set="index" t-value="index + 1" />
-                            </td>
-                            <td style="width: 110px; border-top: none !important;">
-                                <span t-field="line.product_id.name" />
-                            </td>
-                            <td style="width: 370px; border-top: none !important;">
-                                <span t-field="line.name" />
-                                <t t-if="lots">
-                                    <br /><span
-                                        t-esc="', '.join(lot.name for lot in lots)"
+                            <t t-if="not line.display_type">
+                                <td
+                                    class="text-center"
+                                    style="width: 60px; border-top: none !important; min-height: 50px;"
+                                >
+                                    <span t-esc="index" />
+                                    <t t-set="index" t-value="index + 1" />
+                                </td>
+                                <td style="width: 110px; border-top: none !important;">
+                                    <span t-field="line.product_id.name" />
+                                </td>
+                                <td style="width: 370px; border-top: none !important;">
+                                    <span t-field="line.name" />
+                                    <t t-if="lots">
+                                        <br /><span
+                                            t-esc="', '.join(lot.name for lot in lots)"
+                                        />
+                                    </t>
+                                </td>
+                                <td
+                                    class="text-center"
+                                    style="width: 50px; border-top: none !important;"
+                                >
+                                    <span t-esc="'{0:,.2f}'.format(line.quantity)" />
+                                </td>
+                                <td
+                                    class="text-right"
+                                    style="width: 90px; border-top: none !important;"
+                                >
+                                    <span t-esc="'{0:,.2f}'.format(line.price_unit)" />
+                                </td>
+                                <td
+                                    class="text-right"
+                                    style="width: 90px; border-top: none !important;"
+                                >
+                                    <span
+                                        t-esc="'{0:,.2f}'.format(line.price_subtotal)"
                                     />
-                                </t>
-                            </td>
-                            <td
-                                class="text-center"
-                                style="width: 50px; border-top: none !important;"
-                            >
-                                <span t-esc="'{0:,.2f}'.format(line.quantity)" />
-                            </td>
-                            <td
-                                class="text-right"
-                                style="width: 90px; border-top: none !important;"
-                            >
-                                <span t-esc="'{0:,.2f}'.format(line.price_unit)" />
-                            </td>
-                            <td
-                                class="text-right"
-                                style="width: 90px; border-top: none !important;"
-                            >
-                                <span t-esc="'{0:,.2f}'.format(line.price_subtotal)" />
-                            </td>
-                            <!-- <td style="border-top: none !important;"/> -->
+                                </td>
+                                <!-- <td style="border-top: none !important;"/> -->
+                            </t>
                         </tr>
                     </t>
                 </tbody>
@@ -159,17 +163,30 @@
                 <div class="col-8" />
                 <div class="col-4">
                     <div class="text-right" style="margin-right:1px;">
-                        <p class="mb8" t-esc="'{0:,.2f}'.format(o.amount_untaxed)" />
-                        <p class="mb8" t-esc="'{0:,.2f}'.format(discount)" />
                         <p
                             class="mb8"
+                            style="margin-bottom:13px;"
+                            t-esc="'{0:,.2f}'.format(o.amount_untaxed)"
+                        />
+                        <p
+                            class="mb8"
+                            style="margin-bottom:13px;"
+                            t-esc="'{0:,.2f}'.format(discount)"
+                        />
+                        <p
+                            class="mb8"
+                            style="margin-bottom:13px;"
                             t-esc="'{0:,.2f}'.format(o.amount_untaxed + discount)"
                         />
-                        <p class="mb8" t-esc="'{0:,.2f}'.format(o.amount_tax)" />
+                        <p
+                            class="mb8"
+                            style="margin-bottom:13px;"
+                            t-esc="'{0:,.2f}'.format(o.amount_tax)"
+                        />
                     </div>
                 </div>
             </div>
-            <p>
+            <p style="margin-bottom:13px;">
                 <div class="row pt8">
                     <div class="col-8 text-center">
                         <p><b t-esc="'(' + amount_text_thai + ')'" /></p>
