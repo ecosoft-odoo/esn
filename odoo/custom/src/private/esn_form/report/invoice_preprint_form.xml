@@ -35,7 +35,7 @@
                 <div
                     class="col-3"
                     name="col_right"
-                    style="padding-top: 215px; padding-left:74px;"
+                    style="padding-top: 215px; padding-left:70px;"
                 >
                     <div style="margin-top:5px;" t-field="o.name" />
                     <div style="margin-top:10px;" t-esc="invoice_date" />
@@ -49,10 +49,15 @@
                     <t t-else="">
                         <div style="margin-top:10px;color:white;" t-esc="'.'" />
                     </t>
-                    <div style="margin-top:10px;" t-field="o.ref" />
+                    <t t-if="o.ref">
+                        <div style="margin-top:10px;" t-esc="o.ref" />
+                    </t>
+                    <t t-else="">
+                        <div style="margin-top:10px;color:white;" t-esc="'.'" />
+                    </t>
                     <div
                         style="margin-top:10px;"
-                        t-field="o.invoice_user_id.display_name"
+                        t-field="o.invoice_user_id.display_name.replace('Easy Network', '').replace('Easynetwork', '')"
                     />
                 </div>
             </div>
@@ -66,12 +71,12 @@
                         <tr>
                             <td
                                 class="text-center"
-                                style="width: 70px; border-top: none !important; min-height: 50px;"
+                                style="width: 60px; border-top: none !important; min-height: 50px;"
                             >
                                 <span t-esc="index" />
                                 <t t-set="index" t-value="index + 1" />
                             </td>
-                            <td style="width: 120px; border-top: none !important;">
+                            <td style="width: 110px; border-top: none !important;">
                                 <span t-field="line.product_id.name" />
                             </td>
                             <td style="width: 370px; border-top: none !important;">
