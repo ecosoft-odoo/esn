@@ -10,6 +10,11 @@
         <field
             name="report_name"
         >esn_form.tax_invoice_delivery_order_a4_form_pdf</field>
+        <field
+            name="report_file"
+        >esn_form.tax_invoice_delivery_order_a4_form_pdf</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
         <field name="report_type">qweb-pdf</field>
         <field name="paperformat_id" ref="esn_form.invoice_paperformat" />
     </record>
@@ -20,6 +25,9 @@
         <field name="model">account.move</field>
         <field name="type">ir.actions.report</field>
         <field name="report_name">esn_form.invoice_preprint_form_pdf</field>
+        <field name="report_file">esn_form.invoice_preprint_form_pdf</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
         <field name="report_type">qweb-pdf</field>
         <field name="paperformat_id" ref="esn_form.invoice_preprint_paperformat" />
     </record>
@@ -30,6 +38,9 @@
         <field name="model">account.move</field>
         <field name="type">ir.actions.report</field>
         <field name="report_name">esn_form.invoice_preprint_no_serial_form_pdf</field>
+        <field name="report_file">esn_form.invoice_preprint_no_serial_form_pdf</field>
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="binding_type">report</field>
         <field name="report_type">qweb-pdf</field>
         <field name="paperformat_id" ref="esn_form.invoice_preprint_paperformat" />
     </record>
