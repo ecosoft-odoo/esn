@@ -1,4 +1,5 @@
 <odoo>
+    <!-- Invoice Preprint -->
     <template id="invoice_preprint_form">
         <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
         <div class="header" style="font-size: 14px;">
@@ -206,6 +207,22 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-call="esn_form.invoice_preprint_form" />
+            </t>
+        </t>
+    </template>
+
+    <!-- Invoice Preprint (No Serial) -->
+    <template
+        id="invoice_preprint_no_serial_form"
+        inherit_id="esn_form.invoice_preprint_form"
+        primary="True"
+    >
+        <xpath expr="//t[@t-if='lots']" position="replace" />
+    </template>
+    <template id="invoice_preprint_no_serial_form_pdf">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="esn_form.invoice_preprint_no_serial_form" />
             </t>
         </t>
     </template>
